@@ -2,7 +2,9 @@
   const videos = [...document.querySelectorAll('video[data-home-loop][data-src]')];
   const load = video => {
     if (!video.dataset.src) return;
-    video.src = video.dataset.src;
+    video.src = window.matchMedia('(max-width: 900px)').matches && video.dataset.mobileSrc
+      ? video.dataset.mobileSrc : video.dataset.src;
+    delete video.dataset.mobileSrc;
     delete video.dataset.src;
     video.muted = true;
     video.load();
