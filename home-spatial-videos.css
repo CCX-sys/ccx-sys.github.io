@@ -1,0 +1,7 @@
+/* Homepage previews: fill the cover and favor the building over video annotations. */
+#architecture-ai .spatial-video-card .work-visual{overflow:hidden;background:#eeefea}
+#architecture-ai .spatial-video-link{display:block;position:relative;width:100%;height:100%;overflow:hidden}
+#architecture-ai .spatial-video-link video{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+#architecture-ai [data-spatial-preview="civic"] video{object-position:35% 50%;transform:scale(1.6);transform-origin:50% 41%}
+#architecture-ai [data-spatial-preview="school"] video{object-position:center;transform:none}
+#architecture-ai .spatial-video-link:focus-visible{outline:3px solid #ad704c;outline-offset:-3px}

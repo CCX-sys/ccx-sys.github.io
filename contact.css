@@ -1,0 +1,56 @@
+@font-face{font-family:"Closing Sans";src:url("assets/fonts/contact-sans-400.otf") format("opentype");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Closing Serif";src:url("assets/fonts/contact-serif-600.ttf") format("truetype");font-weight:600;font-style:normal;font-display:swap}
+.home-page .contact-chapter{--contact-header:84px;--contact-view:calc(100svh - var(--contact-header));--contact-pad:clamp(22px,6.45vw,104px);padding:0;min-height:var(--contact-view);background:#efede8;color:var(--ink);font-family:"Closing Sans",Arial,sans-serif}
+.contact-chapter .shell{width:100%;max-width:calc(1360px + var(--contact-pad)*2);padding-inline:var(--contact-pad)}
+.contact-paper{position:relative;background:#efede8}
+.contact-paper>.shell{position:relative;min-height:calc(var(--contact-view)*.52);padding-top:clamp(64px,9.8vh,104px)}
+.contact-eyebrow{display:block;font-size:20px;line-height:1.2;letter-spacing:.21em;color:var(--ink)}
+.contact-chapter .contact-paper h2{margin-top:18px;font-family:"Closing Serif","Noto Serif SC","Songti SC",serif;font-size:clamp(40px,5.04vw,80px);font-weight:600;line-height:1.25;letter-spacing:.055em;text-wrap:balance}
+.contact-signature{position:absolute;z-index:2;left:var(--contact-pad);bottom:-24px;display:flex;align-items:center;gap:24px}
+.contact-signature img{display:block;width:clamp(88px,7.083vw,120px);aspect-ratio:5 / 7;height:auto;object-fit:cover;filter:none}
+.contact-signature strong{display:block;font-family:"Closing Serif","Noto Serif SC","Songti SC",serif;font-size:24px;line-height:1.5;font-weight:600;color:var(--ink)}
+.contact-signature small{display:block;margin-top:4px;font-size:18px;line-height:1.8;color:#646c66}
+.contact-ink{background:#172022;color:var(--paper)}
+.contact-ink>.shell{display:flex;flex-direction:column;min-height:calc(var(--contact-view)*.48);padding-top:clamp(60px,9.1vh,96px);padding-bottom:40px}
+.contact-actions{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;min-width:0}
+.contact-address{display:flex;flex-direction:column;align-items:flex-start;min-width:0;margin:0;padding:0;font-style:normal}
+.contact-email{display:block;min-height:44px;font-size:clamp(26px,3.2vw,50px);font-weight:400;line-height:1.3;letter-spacing:.045em;overflow-wrap:anywhere}
+.contact-phone{display:block;min-height:44px;margin-top:14px;font-size:clamp(22px,2.4vw,38px);font-weight:400;line-height:1.5;letter-spacing:.015em;color:var(--accent)}
+.contact-resume{display:inline-flex;align-items:center;gap:16px;flex:none;min-height:44px;margin-top:6px;padding-bottom:6px;border-bottom:1.5px solid currentColor;font-family:"Closing Serif","Noto Serif SC","Songti SC",serif;font-size:clamp(20px,2.25vw,36px);font-weight:600;line-height:1.4;letter-spacing:.045em;transition:color .2s}
+.contact-resume svg{width:30px;height:30px;stroke-width:1.3}
+.contact-email:hover,.contact-resume:hover{color:var(--accent)}
+.contact-phone:hover{text-decoration:underline;text-underline-offset:6px}
+.contact-ink a:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+.contact-ink .portfolio-footer{margin-top:auto;margin-inline:clamp(-20px,-1.25vw,0px);padding-top:22px;border-top:1px solid #c9d0ca85;font-size:16px;letter-spacing:0;color:var(--paper)}
+.contact-ink .portfolio-footer a{min-height:44px}
+.contact-ink .footer-en{display:none}
+@media(max-width:800px){
+  .home-page .contact-chapter{--contact-header:70px}
+  .contact-paper>.shell{padding-top:64px}
+  .contact-eyebrow{font-size:14px;line-height:1.3}
+  .contact-signature{gap:18px}
+  .contact-signature strong{font-size:20px}
+  .contact-signature small{font-size:14px}
+  .contact-ink>.shell{padding-bottom:24px}
+  .contact-phone{margin-top:8px}
+  .contact-resume{gap:12px}
+  .contact-resume svg{width:25px;height:25px}
+  .contact-ink .portfolio-footer{margin-inline:0;font-size:12px}
+}
+@media(max-width:600px){
+  .home-page .contact-chapter{--contact-header:68px;--contact-pad:22px}
+  .contact-paper>.shell{padding-top:48px}
+  .contact-eyebrow{font-size:12px;line-height:1.4;letter-spacing:.22em}
+  .contact-chapter .contact-paper h2{margin-top:18px;font-size:clamp(30px,9vw,42px);line-height:1.3;letter-spacing:.03em}
+  .contact-signature{bottom:-20px;gap:16px}
+  .contact-signature img{width:80px}
+  .contact-signature strong{font-size:20px}
+  .contact-signature small{margin-top:3px;font-size:13px;line-height:1.7}
+  .contact-ink>.shell{padding-top:50px;padding-bottom:18px}
+  .contact-actions{flex-direction:column;align-items:flex-start;gap:20px}
+  .contact-email{font-size:26px;line-height:1.35;letter-spacing:-.025em}
+  .contact-phone{font-size:23px;line-height:1.5;margin-top:8px}
+  .contact-resume{margin-top:0;gap:12px;font-size:21px;letter-spacing:.03em}
+  .contact-resume svg{width:24px;height:24px}
+  .contact-ink .portfolio-footer{padding-top:16px;font-size:11px;gap:12px}
+}

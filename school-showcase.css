@@ -1,0 +1,18 @@
+.school-project-page .detail-gallery figure>a{
+ display:block;width:100%;height:auto;min-height:0;max-height:none;aspect-ratio:16/10;overflow:hidden;
+}
+.school-project-page .detail-gallery img{
+ display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center;
+}
+.school-project-page .image-explorer{grid-template-columns:150px minmax(0,1fr);}
+.school-project-page .explorer-stage{padding:0;min-width:0;}
+.school-project-page .explorer-stage img{
+ display:block;width:100%;height:auto;max-width:none;max-height:none;aspect-ratio:143/90;object-fit:contain;
+}
+.school-project-page .explorer-stage p{padding:13px 18px;margin:0;}
+.school-project-page .method-steps{grid-template-columns:repeat(3,minmax(0,1fr));}
+@media(max-width:800px){.school-project-page .method-steps{grid-template-columns:1fr;}}
+@media(max-width:600px){.school-project-page .image-explorer{display:block;}}
+
+.school-project-page .view-comparison-note{font-size:13px;line-height:1.85;color:var(--muted);margin-top:15px}
+.school-project-page .detail-video video{display:block;max-height:none;object-fit:contain}

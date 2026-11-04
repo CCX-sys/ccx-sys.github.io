@@ -1,0 +1,35 @@
+.architecture-cover{aspect-ratio:16/10;background:#e8e7e0;}
+.architecture-cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--cover-position,50% 50%)!important;}
+.architecture-card:hover .architecture-cover img{transform:none;}
+.architecture-project-page .detail-hero{max-height:none;overflow:visible;background:transparent;}
+.architecture-project-page .detail-hero img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;}
+.architecture-project-page .detail-facts{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
+.architecture-project-page .detail-facts>div{min-width:0;padding:22px 18px;}
+.architecture-project-page .detail-facts strong{font-size:clamp(15px,1.4vw,18px);overflow-wrap:anywhere;}
+.architecture-project-page .detail-facts span{font-size:11px;}
+.architecture-project-page .detail-facts+.detail-columns{margin-top:28px;}
+.architecture-project-page .detail-meta{display:flex;flex-wrap:wrap;}
+.architecture-project-page .detail-gallery figure>a{display:flex;width:100%;height:auto;min-height:0;max-height:none;aspect-ratio:var(--project-image-ratio,16/10);align-items:center;justify-content:center;background:#e8e7e0;overflow:visible;}
+.architecture-project-page .detail-gallery img{display:block;width:100%;height:100%;max-width:100%;max-height:none;object-fit:contain;object-position:center;}
+.architecture-project-page .detail-gallery figcaption{line-height:1.8;}
+.architecture-project-page.project-zhengzhou{--project-image-ratio:4/3;}
+.architecture-project-page.project-kindergarten{--project-image-ratio:1.4144;}
+.architecture-project-page.project-wanzhou{--project-image-ratio:16/9;}
+@media(max-width:900px){
+ .architecture-project-page .detail-facts{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media(max-width:600px){
+ .architecture-cover{aspect-ratio:16/10;}
+ .architecture-project-page .detail-facts{gap:10px;}
+ .architecture-project-page .detail-facts>div{padding:16px 12px;}
+ .architecture-project-page .detail-facts strong{font-size:15px;}
+ .architecture-project-page .detail-facts span{font-size:10px;}
+ .architecture-project-page .detail-meta{gap:9px 16px;}
+}
+
+.image-source-crop{display:block;position:relative;width:100%;aspect-ratio:var(--image-visible-ratio);overflow:hidden}
+.architecture-cover .image-source-crop{position:absolute;inset:0;height:100%;aspect-ratio:auto}
+.detail-hero .image-source-crop>img{position:absolute;inset:0 auto auto 0;display:block;width:100%;height:auto;max-height:none;object-fit:contain;object-position:top}
+.architecture-cover .image-source-crop>img{position:absolute;inset:0 auto auto 0;height:var(--cover-image-height,100%);max-height:none;object-fit:cover;}
+
+.architecture-cover>img{position:absolute;left:0;bottom:0;height:var(--cover-image-height,100%);}
