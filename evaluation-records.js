@@ -16,6 +16,7 @@
         out=setReason(out,side,i,input.reasons[side][i],mode);
       }
       out=setPreference(out,seed.preference??null);out.note=seed.note||'';out.ai.note=seed.ai?.note||seed.note||'';
+      for(const issue of seed.issues||[])out=addIssue(out,issue);
     }
     return out;
   }
@@ -67,7 +68,7 @@
     const rows=[['案例','评分类型','视频',...dimensions,'有效项均分','有效维度数',...dimensions.map(n=>n+'·依据'),'相对比较','判断依据','问题记录','来源','状态']];
     for(const r of records)for(const mode of ['manual','ai'])for(const side of ['A','B']){
       const t=target(r,mode);
-      rows.push([r.caseId,mode==='ai'?'AI辅助参考':'人工复评',side,...t.scores[side].map(v=>v===null?'N/A':v),average(r,side,mode),coverage(r,side,mode),...t.reasons[side],r.preference,t.note,JSON.stringify(r.issues.filter(i=>i.side===side)),t.source==='edited'?'本机复评记录':'样例预填参考',r.status==='submitted'?'已保存':'编辑中']);
+      rows.push([r.caseId,mode==='ai'?'AI 参考评分':'人工复评',side,...t.scores[side].map(v=>v===null?'N/A':v),average(r,side,mode),coverage(r,side,mode),...t.reasons[side],r.preference,t.note,JSON.stringify(r.issues.filter(i=>i.side===side)),t.source==='edited'?'本机复评记录':'样例预填参考',r.status==='submitted'?'已保存':'编辑中']);
     }
     return rows.map(row=>row.map(csvCell).join(',')).join('\r\n');
   }

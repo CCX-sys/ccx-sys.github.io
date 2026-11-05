@@ -5,8 +5,8 @@
   const $=id=>document.getElementById(id);
   const videos={A:$('video-a'),B:$('video-b')};
   const ids=data.map(c=>c.id);
-  const key='ccx-portfolio-evaluations-v2';
-  let records={},current=data[0],record,openSide=null,mode='manual',storageReadable=true;
+  const key='ccx-portfolio-evaluations-v2-20261105';
+  let records={},current=data[0],record,openSide=null,mode='ai',storageReadable=true;
   const fmt=t=>(Number.isFinite(t)?t:0).toFixed(2);
   const text=(id,value)=>{$(id).textContent=value;};
   function status(message,error=false){text('evaluation-status',message);$('evaluation-status').classList.toggle('error',error);}
@@ -22,21 +22,13 @@
     const saved=localStorage.getItem(key);
     if(saved){const parsed=JSON.parse(saved);if(parsed.type!=='portfolio-local-evaluations'||parsed.version!==2||!parsed.records||typeof parsed.records!=='object'||Array.isArray(parsed.records))throw new Error();const staged={};for(const [id,value] of Object.entries(parsed.records)){const valid=R.validateRecord(value,ids);if(valid.caseId!==id)throw new Error();staged[id]=valid;}records=staged;}
   }catch(e){storageReadable=false;status('本机已有记录无法读取；原数据未改写。请先导出或检查浏览器存储。',true);}
-  if(storageReadable){
-    const beforeCopy=JSON.stringify(records);
-    for(const id of Object.keys(records))records[id]=window.upgradeEvaluationCopy(records[id]);
-    if(JSON.stringify(records)!==beforeCopy){
-      try{const archiveKey=key+'-before-dual-review';if(localStorage.getItem(archiveKey)===null)localStorage.setItem(archiveKey,localStorage.getItem(key));}
-      catch(e){storageReadable=false;status('旧版记录仍保留；浏览器空间不足，请导出后再保存修改。',true);}
-    }
-  }
   for(const c of data)if(!records[c.id])records[c.id]=R.createRecord(c.id,window.EVAL_SEEDS[c.id]);
   function persist(message=true){record.updatedAt=new Date().toISOString();records[current.id]=record;if(store()&&message)status(record.status==='submitted'?'评分已保存在本机。':'评分变更已自动保存。');updateTotals();}
   function updateTotals(){
     for(const side of ['A','B']){
       const average=R.average(record,side,mode),count=R.coverage(record,side,mode);
       text('total-'+side,average===null?'N/A':average.toFixed(2));text('coverage-'+side,count+' / 5 项');
-      text('video-result-score-'+side,(mode==='ai'?'AI辅助参考':'人工复评')+' · '+(average===null?'N/A':average.toFixed(2)+' / 5')+' · '+count+' 项有效');
+      text('video-result-score-'+side,(mode==='ai'?'AI 参考评分':'人工复评')+' · '+(average===null?'N/A':average.toFixed(2)+' / 5')+' · '+count+' 项有效');
       const active=mode==='ai'?record.ai:record;
       text('video-result-reason-'+side,active.reasons[side][0]||'请在对应维度记录判断依据。');
     }
@@ -71,7 +63,7 @@
   for(const side of ['A','B']){
     const v=videos[side];
     for(const event of ['loadedmetadata','timeupdate','play','pause','ended'])v.addEventListener(event,updateControls);
-    v.addEventListener('error',()=>text('media-status','视频未能读取，请检查本地文件是否完整。'));
+    v.addEventListener('error',()=>text('media-status','视频暂时无法读取，请刷新页面后重试。'));
     v.addEventListener('click',()=>v.paused?play([side]):v.pause());
     document.querySelector('[data-play="'+side+'"]').addEventListener('click',()=>v.paused?play([side]):v.pause());
     $('seek-'+side.toLowerCase()).addEventListener('input',e=>seek(side,Number(e.target.value)));
@@ -106,8 +98,8 @@
   function chooseCase(id){
     pauseAll();current=data.find(c=>c.id===id)||data[0];record=R.validateRecord(records[current.id],ids);
     document.body.dataset.currentCase=current.id;text('case-title',current.label);text('case-brief','任务要求：'+current.brief);text('case-kind',current.type);text('prompt-text',current.prompt);
-    $('input-reference').hidden=!current.reference;if(current.reference){$('input-reference').href=current.reference;$('reference-image').src=current.reference;}
-    for(const item of current.videos){const v=videos[item.side];v.poster=item.poster;v.src=item.src;v.load();text('video-meta-'+item.side,item.width+' × '+item.height+' · '+item.fps+' fps');}
+    $('task-checks').replaceChildren(...current.checks.map(rule=>{const item=document.createElement('li');item.textContent=rule;return item;}));
+    for(const item of current.videos){const v=videos[item.side];v.poster=item.poster;v.src=item.src;v.load();text('video-label-'+item.side,item.side+' · '+item.model);text('video-meta-'+item.side,item.width+' × '+item.height+' · '+item.fps+' fps');}
     document.querySelectorAll('[data-case-id]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.caseId===current.id)));
     $('link-progress').checked=false;$('playback-speed').value='1';showRecord();updateControls();history.replaceState(null,'','#case='+current.id);
     if(!$('evaluation-status').classList.contains('error'))status('');
@@ -128,12 +120,12 @@
   $('export-csv').addEventListener('click',()=>{const list=exportRecords();if(!list.length){status('填写评分或观察后再导出。',true);return;}download('建筑视频评测.csv','\ufeff'+R.toCSV(list),'text/csv;charset=utf-8');status('已导出 CSV 评分表。');});
   $('import-json').addEventListener('change',async e=>{
     const file=e.target.files[0];if(!file)return;
-    try{if(!storageReadable)throw new Error('请先备份并修复本机无法读取的记录');if(file.size>1024*1024)throw new Error('文件超过 1 MB');const input=JSON.parse(await file.text());if(input.type!=='portfolio-local-evaluations'||input.version!==2||!Array.isArray(input.records)||input.records.length>ids.length)throw new Error('请选择新版五维 JSON 文件；旧版四维记录原样保留，不能直接套入五维');const staged={...records},seen=new Set();for(const item of input.records){const valid=R.validateRecord(window.upgradeEvaluationCopy(R.validateRecord(item,ids)),ids);if(seen.has(valid.caseId))throw new Error('文件中有重复案例');seen.add(valid.caseId);staged[valid.caseId]=valid;}const previous=records;records=staged;if(!store()){records=previous;throw new Error('无法保存导入结果');}chooseCase(current.id);status('已导入 '+seen.size+' 个案例的人工与 AI 记录。');}
+    try{if(!storageReadable)throw new Error('请先备份并修复本机无法读取的记录');if(file.size>1024*1024)throw new Error('文件超过 1 MB');const input=JSON.parse(await file.text());if(input.type!=='portfolio-local-evaluations'||input.version!==2||!Array.isArray(input.records)||input.records.length>ids.length)throw new Error('请选择新版五维 JSON 文件；旧版四维记录原样保留，不能直接套入五维');const staged={...records},seen=new Set();for(const item of input.records){const valid=R.validateRecord(item,ids);if(seen.has(valid.caseId))throw new Error('文件中有重复案例');seen.add(valid.caseId);staged[valid.caseId]=valid;}const previous=records;records=staged;if(!store()){records=previous;throw new Error('无法保存导入结果');}chooseCase(current.id);status('已导入 '+seen.size+' 个案例的人工与 AI 记录。');}
     catch(err){status('导入未完成：'+err.message+'。原有记录保留。',true);}
     e.target.value='';
   });
-  document.querySelectorAll('[data-enlarge]').forEach(b=>b.addEventListener('click',()=>{pauseAll();openSide=b.dataset.enlarge;const v=$('enlarged-video');v.src=videos[openSide].src;v.currentTime=videos[openSide].currentTime;text('enlarged-title',current.label+' · 视频 '+openSide);$('video-modal').showModal();}));
+  document.querySelectorAll('[data-enlarge]').forEach(b=>b.addEventListener('click',()=>{pauseAll();openSide=b.dataset.enlarge;const v=$('enlarged-video');v.src=videos[openSide].src;v.currentTime=videos[openSide].currentTime;text('enlarged-title',current.label+' · '+openSide+' · '+current.videos.find(item=>item.side===openSide).model);$('video-modal').showModal();}));
   $('close-video').addEventListener('click',()=>$('video-modal').close());$('video-modal').addEventListener('close',()=>{const v=$('enlarged-video');v.pause();if(openSide)seek(openSide,v.currentTime,false);});
   document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['INPUT','TEXTAREA','SELECT','BUTTON','A'].includes(document.activeElement.tagName)&&!$('video-modal').open){e.preventDefault();$('play-both').click();}});
-  chooseCase(location.hash.match(/case=(CASE_\d+)/)?.[1]||data[0].id);
+  chooseCase(new URLSearchParams(location.hash.slice(1)).get('case')||data[0].id);
 })();
