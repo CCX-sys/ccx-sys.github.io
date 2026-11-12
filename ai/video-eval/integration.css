@@ -1,0 +1,98 @@
+/* The original workbench remains inside Agent / 01 outcomes. */
+#agent-video-platform{background:var(--white);color:var(--ink);scroll-margin-top:10px;min-width:0;border:1px solid var(--line)}
+#agent-video-platform .platform-overview{padding:24px 26px;border-bottom:1px solid var(--line)}
+#agent-video-platform .platform-overview p{font-size:14px;line-height:1.9;max-width:870px}
+#agent-video-platform .platform-overview>span{display:block;margin-top:10px;font-size:11px;letter-spacing:.04em;color:var(--muted)}
+#agent-video-platform .evaluation-shell{padding:0;max-width:none;margin:0}
+#agent-video-platform .case-queue{padding:20px 24px;margin:0;gap:8px;background:#e7ebe2}
+#agent-video-platform .case-queue button{flex:1;min-width:180px;min-height:58px;font-size:12px;padding:9px;line-height:1.65}
+#agent-video-platform .case-queue button img{flex:none;width:53px;height:37px}
+#agent-video-platform .case-queue button[aria-pressed=true]{background:var(--ink);color:var(--white);border-color:var(--ink)}
+#agent-video-platform .case-task{border:0;border-top:1px solid var(--line);background:var(--white)}
+#agent-video-platform .case-task h3{font-size:24px;font-weight:400;line-height:1.6}
+#agent-video-platform .case-task p,#agent-video-platform .case-task details{font-size:13px;line-height:1.9}
+#agent-video-platform .case-task details ul{padding-left:20px;line-height:2}
+#agent-video-platform .case-task details li{margin-top:6px}
+#agent-video-platform .eval-players{background:var(--deep);padding:22px}
+#agent-video-platform .video-frame{overflow:hidden}
+#agent-video-platform .video-label strong{font-size:13px}
+#agent-video-platform .video-label span{font-size:10px;white-space:nowrap}
+#agent-video-platform .player-controls .time-readout{min-width:84px}
+#agent-video-platform .frame-controls button{min-height:38px;font-size:11px}
+#agent-video-platform .video-result{min-height:103px}
+#agent-video-platform .video-result p{font-size:12px;line-height:1.9}
+#agent-video-platform .video-result a{font-size:11px}
+#agent-video-platform .playback-tools button{min-height:44px;font-size:12px}
+#agent-video-platform #media-status:empty{display:none}
+#agent-video-platform .evaluation-workspace{border:0;grid-template-columns:minmax(0,1.65fr) minmax(290px,1fr);background:var(--white)}
+#agent-video-platform .score-area{padding:28px;container-type:inline-size;container-name:agent-scores}
+#agent-video-platform .notes-area{padding:28px;position:sticky;top:165px;align-self:start}
+#agent-video-platform .notes-area h3{font-size:21px;font-weight:400;line-height:1.6}
+#agent-video-platform .bad-case-entry h3{font-size:15px;margin-bottom:14px}
+#agent-video-platform .notes-area textarea{font-size:13px;line-height:1.9;background:#fffefb}
+#agent-video-platform .issue-list{max-height:none;overflow:visible}
+#agent-video-platform .issue-list li{font-size:12px;line-height:1.9}
+#agent-video-platform .score-mode-tabs{max-width:none;gap:16px}
+#agent-video-platform .score-mode-tabs h3{flex:1;margin:0;min-width:0;font:inherit}
+#agent-video-platform .score-mode-tabs button{font-size:21px}
+#agent-video-platform .score-table tbody tr{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;background:#f7f8f1;border-color:var(--line);padding:22px;align-items:stretch}
+#agent-video-platform .score-table tbody th{grid-column:1/-1;width:auto;min-width:0;padding:0 0 22px}
+#agent-video-platform .score-table tbody td{display:flex;flex-direction:column;width:auto;min-width:0;padding:20px 0 0;margin:0;text-align:left}
+#agent-video-platform .score-table tbody th strong{font-size:15px}
+#agent-video-platform .dimension-heading{margin-bottom:18px}
+#agent-video-platform .score-table .dimension-rules{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 20px;width:100%;max-width:none;font-size:12px;line-height:1.85}
+#agent-video-platform .dimension-rules .rule-anchor{grid-template-columns:30px minmax(0,1fr);gap:10px;padding:10px 12px;background:#eef1e7;margin:0;align-items:baseline}
+#agent-video-platform .dimension-rules .rule-anchor:last-child{grid-column:1/-1}
+#agent-video-platform .rule-anchor b{font-size:12px;color:#526147;white-space:nowrap}
+#agent-video-platform .rule-anchor i{color:#58634f;overflow-wrap:break-word}
+#agent-video-platform .score-result-head{flex:none;min-height:46px;margin-bottom:14px;gap:16px;align-items:center}
+#agent-video-platform .score-value-label{font-size:14px;line-height:1.6;white-space:nowrap;flex:none}
+#agent-video-platform .score-table select{flex:none;width:96px;min-width:96px;max-width:100%;min-height:46px;font-size:14px}
+#agent-video-platform .reason-label{display:block;flex:none;font-size:12px;color:var(--muted);line-height:1.7;margin:0 0 8px}
+#agent-video-platform .dimension-reason{flex:1 1 auto;width:100%;max-width:none;min-width:0;min-height:128px;margin:0;padding:13px 14px;font-size:14px;line-height:1.9;color:var(--ink)}
+#agent-video-platform .evaluation-actions{border:0;border-top:1px solid var(--line);background:#e7ebe2}
+#agent-video-platform .evaluation-actions button,#agent-video-platform .import-label{font-size:12px}
+#agent-video-platform .visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+#agent-video-platform #score-heading{scroll-margin-top:10px}
+#agent-video-platform :is(button,input,textarea,select,summary):focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px}
+#agent-video-platform .import-label:focus-within{outline:2px solid var(--accent-ink);outline-offset:3px}
+#agent-video-platform .eval-modal{margin:auto;padding:18px}
+/* Respond to the scoring area, including when it sits beside issue notes. */
+@container agent-scores (min-width:880px){
+  #agent-video-platform .score-table .dimension-rules{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+  #agent-video-platform .dimension-rules .rule-anchor{display:block;padding:12px}
+  #agent-video-platform .dimension-rules .rule-anchor:last-child{grid-column:auto}
+  #agent-video-platform .rule-anchor b{display:block;margin-bottom:5px}
+}
+@container agent-scores (max-width:559px){
+  #agent-video-platform .score-table tbody tr{grid-template-columns:minmax(0,1fr);gap:20px 0;padding:16px}
+  #agent-video-platform .score-table tbody th{padding-bottom:0}
+  #agent-video-platform .score-table tbody td{padding-top:18px;margin:0}
+  #agent-video-platform .score-table .dimension-rules{grid-template-columns:minmax(0,1fr);gap:8px}
+  #agent-video-platform .dimension-rules .rule-anchor{padding:9px 10px}
+  #agent-video-platform .score-value-label{font-size:14px}
+  #agent-video-platform .dimension-reason{min-height:128px}
+}
+@media(max-width:1100px){
+  #agent-video-platform .evaluation-workspace{grid-template-columns:1fr}
+  #agent-video-platform .notes-area{position:static}
+  #agent-video-platform .score-area{border-right:0;border-bottom:1px solid var(--line)}
+}
+@media(max-width:700px){
+  #agent-video-platform .platform-overview{padding:19px 18px}
+  #agent-video-platform .case-queue{padding:16px;gap:7px}
+  #agent-video-platform .case-queue button{min-width:calc(50% - 8px);font-size:11px;flex:1 1 45%}
+  #agent-video-platform .case-queue button:last-child{flex-grow:0}
+  #agent-video-platform .case-task{padding:18px}
+  #agent-video-platform .case-task h3{font-size:21px}
+  #agent-video-platform .eval-players{padding:18px 15px}
+  #agent-video-platform .player-grid{grid-template-columns:1fr;gap:24px}
+  #agent-video-platform .player-controls .time-readout{font-size:10px;min-width:82px}
+  #agent-video-platform .video-label span{font-size:9px}
+  #agent-video-platform .video-result{min-height:0}
+  #agent-video-platform .score-area,#agent-video-platform .notes-area{padding:21px 16px}
+  #agent-video-platform .score-mode-tabs button{font-size:19px}
+  #agent-video-platform .issue-inputs{grid-template-columns:70px 82px minmax(0,1fr);gap:7px}
+  #agent-video-platform .issue-inputs button{white-space:normal;line-height:1.5}
+  #agent-video-platform .evaluation-actions{padding:18px 16px}
+}
